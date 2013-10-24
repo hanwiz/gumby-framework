@@ -23,9 +23,19 @@ You will need to add also the <code>modernizr-rails</code> gem to your gemfile:
 	# Gemifile
 	
 	gem "modernizr-rails"
-	gem "gumby-framework"
+	gem "gumby-framework", :github => 'TeckniX/gumby-framework', :submodules => true
 	
 Then run <code>bundle install</code>.
+
+The Gumby framework is always pulled fresh from their repo - the only issue is that their folder structure isn't rails compliant.
+This is fixed by adding the following to your `config/application.rb`
+	
+	config.assets.paths << Gumby::Framework::Engine.root.join("vendor", "assets", "sass")
+	config.assets.paths << Gumby::Framework::Engine.root.join("vendor", "assets", "js")
+	config.assets.paths << Gumby::Framework::Engine.root.join("vendor", "assets", "fonts")
+	config.assets.paths << Gumby::Framework::Engine.root.join("vendor", "assets", "img")
+	
+Notice we're pulling their Sass files instead of their css - This means that you can over-write any setting the sass way. Now isn't that sassy?
 
 You will need to add also this tag to your HTML head tag:
 
@@ -43,7 +53,8 @@ Add this line at the end of your application.css
 You will need to add modernizr and global Gumby object in your application.js:
 
 	//= require modernizr
-	//= require gumby
+	//= require main
+	//= require plugin
 	
 After this line, you can add the Gumby JS plugins like this:
 
