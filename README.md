@@ -30,10 +30,7 @@ Then run <code>bundle install</code>.
 The Gumby framework is always pulled fresh from their repo - the only issue is that their folder structure isn't rails compliant.
 This is fixed by adding the following to your `config/application.rb`
 	
-	config.assets.paths << Gumby::Framework::Engine.root.join("vendor", "assets", "sass")
-	config.assets.paths << Gumby::Framework::Engine.root.join("vendor", "assets", "js")
-	config.assets.paths << Gumby::Framework::Engine.root.join("vendor", "assets", "fonts")
-	config.assets.paths << Gumby::Framework::Engine.root.join("vendor", "assets", "img")
+	config.assets.paths << Gumby::Framework::Engine.root.join("vendor", "assets")
 	
 Notice we're pulling their Sass files instead of their css - This means that you can over-write any setting the sass way. Now isn't that sassy?
 
@@ -45,7 +42,7 @@ You will need to add also this tag to your HTML head tag:
 
 Add this line at the end of your application.css
 
-	*= require gumby
+	*= require sass/gumby
 	
 #### Javascript
 
@@ -53,8 +50,9 @@ Add this line at the end of your application.css
 You will need to add modernizr and global Gumby object in your application.js:
 
 	//= require modernizr
-	//= require main
-	//= require plugin
+	//= require js/libs/gumby.min.js
+	//= require js/main
+	//= require js/plugin
 	
 After this line, you can add the Gumby JS plugins like this:
 
